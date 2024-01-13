@@ -72,6 +72,7 @@
     <button onclick="calculateRevenue()">Calculate Revenue</button>
 
     <div id="result"></div>
+    <div id="investmentResult"></div>
 
     <script>
       function calculateRevenue() {
@@ -86,6 +87,7 @@
         var revenue = numSamples * sellingPrice;
         var profit = numSamples * (sellingPrice - costPerSample);
         var profitMargin = (profit / revenue) * 100;
+        var totalInvestment = numSamples * costPerSample;
 
         document.getElementById("result").innerHTML =
           "Potential Revenue (Umsatz): " +
@@ -97,7 +99,24 @@
           "<br> Profit Margin: " +
           profitMargin.toFixed(2) +
           "%";
+
+        document.getElementById("investmentResult").innerHTML =
+          "Total Investment Required: " + totalInvestment.toFixed(2) + "€";
       }
+
+      // Add event listeners to update results on input change
+      document
+        .getElementById("numSamples")
+        .addEventListener("input", calculateRevenue);
+      document
+        .getElementById("shippingCost")
+        .addEventListener("input", calculateRevenue);
+      document
+        .getElementById("manufacturingCost")
+        .addEventListener("input", calculateRevenue);
+      document
+        .getElementById("sellingPrice")
+        .addEventListener("input", calculateRevenue);
     </script>
   </body>
 </html>
